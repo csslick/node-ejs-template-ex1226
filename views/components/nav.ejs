@@ -7,8 +7,25 @@
       onclick="isAdmin('<%= id %>'); return false;" 
       href="/admin">admin</a>
   </div>
-    <a href="/login">logIn</a>
+    <a href="/login" class="login">logIn</a>
+    <button class="logout" onclick="logout()">logout</button>
 </nav>
+<script>
+  const isLogIn = sessionStorage.getItem('islogin');
+  console.log('storage login = ', isLogIn)
+  if(isLogIn) {
+    document.querySelector('.login').style.display = 'none'
+    document.querySelector('.logout').style.display = 'block'
+  } else {
+    document.querySelector('.logout').style.display = 'none'
+    document.querySelector('.login').style.display = 'block'
+  }
+
+  function logout() {
+    sessionStorage.removeItem('islogin');
+    location.href = '/'
+  }
+</script>
 
 <script>
   // 관리자 확인(id, pwd)

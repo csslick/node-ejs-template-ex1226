@@ -26,7 +26,10 @@ app.use(express.static("public"));
 
 // home
 app.get('/', function(요청, 응답){
-  응답.render('pages/index.ejs', { id : admin.id})
+  응답.render('pages/index.ejs', { 
+    id : admin.id,
+    login: 0
+  })
 })
 
 // about
@@ -56,7 +59,10 @@ app.get('/download', function(req, res) {
 
 // login page
 app.get('/login', function(req, res) {
-  res.render('pages/login.ejs', { id: admin.id})
+  res.render('pages/login.ejs', { 
+    id: admin.id,
+    login: false
+  })
 })
 
 
@@ -77,8 +83,8 @@ app.post('/login-check', function(req, res) {
       login: 'fail'
     });
   }
-
 })
+
 
 const port = 3001;
 app.listen(port, () => {
