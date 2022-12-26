@@ -8,17 +8,9 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <% if(locals.login) { %>
-      로그인 상태: <%= login %> 
-    <% } else { %>
-        로그인(안됨)
-    <% } %>
-  아디: <%= id  %> 
-  <% if(locals.userInfo) {%>
-    <%= 에러 %>
-  <%} else { %>
-    userInfo
-  <% } %>  
+
+  로그인 상태: <%= login %> 
+  아이디: <%= id  %> 
   
   <!-- nav -->
   <%- include('../components/nav.ejs') %> 
@@ -26,7 +18,17 @@
 
 
   <script>
-
+    // 로그인 상태일때 '로그아웃'만 표시
+    if(sessionStorage.getItem('islogin')) {
+      console.log('로그인 성공')
+      sessionStorage.setItem('islogin', true)
+      document.querySelector('.login').style.display = 'none'
+      document.querySelector('.logout').style.display = 'block'
+    } else {
+      document.querySelector('.login').style.display = 'block'
+      document.querySelector('.logout').style.display = 'none'
+    }
+ 
   </script>
 </body>
 </html>
