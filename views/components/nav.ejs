@@ -1,14 +1,18 @@
 <nav>
-  <a href="/">home</a> |
-  <a href="/about">about</a> |
-  <a href="/product">product</a> |
-  <a 
-    onclick="isAdmin('<%= admin.id %>'); return false;" 
-    href="/admin">admin</a>
+  <div>
+    <a href="/">home</a> |
+    <a href="/about">about</a> |
+    <a href="/product">product</a> |
+    <a 
+      onclick="isAdmin('<%= admin.id %>'); return false;" 
+      href="/admin">admin</a>
+  </div>
+    <a href="/login">logIn</a>
 </nav>
 
 <script>
   // 관리자 확인(id, pwd)
+  // 아이디 비밀번호 확인까지 추가해 보세요
   function isAdmin(id) {
     const inputId = prompt('관리자 아이디 입력');
     if(inputId === id) {

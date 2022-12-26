@@ -8,8 +8,20 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <%= admin.id  %> 
-  <%= admin.pwd  %> 
+  로그인 상태: 
+    <% if(locals.login) { %>
+        로그아웃
+    <% } else { %>
+        로그인(안됨)
+    <% } %>
+  아디: <%= admin.id  %> 
+  비번: <%= admin.pwd  %> 
+  <% if(locals.userInfo) {%>
+    <%= 에러 %>
+  <%} else { %>
+    userInfo
+  <% } %>  
+  
   <!-- nav -->
   <%- include('../components/nav.ejs') %> 
   <h1>쇼핑몰 홈페이지</h1>

@@ -3,6 +3,9 @@ const app = express();
 const ejs = require('ejs');
 const fs = require('fs');
 
+app.use(express.json()); 
+app.use(express.urlencoded( {extended : false } ));
+
 let products = []; // db 저장할 변수
 
 // DB 파일 불러오기
@@ -28,12 +31,12 @@ app.get('/', function(요청, 응답){
 
 // about
 app.get('/about', function(req, res) {
-  res.render('pages/about.ejs')
+  res.render('pages/about.ejs', {admin})
 })
 
 // product
 app.get('/product', function(req, res) {
-  res.render('pages/product.ejs', {products})
+  res.render('pages/product.ejs', {products, admin})
 })
 
 // admin
@@ -51,6 +54,30 @@ app.get('/download', function(req, res) {
   res.download(file)
 })
 
+// login page
+app.get('/login', function(req, res) {
+  res.render('pages/login.ejs', {admin})
+})
+
+
+// login check
+app.post('/login-check', function(req, res) {
+  const id = req.body.id;
+  const pwd = req.body.pwd;
+  const userinfo = { id, pwd }
+  console.log(`id: ${id}, pwd: ${pwd}`)
+  if(id == admin.id && pwd == admin.pwd) {
+    res.render('pages/index.ejs', { 
+      admin, 
+      login: true
+    });
+  } else {
+    res.writeHead(200, { 'Content-Type': 'text/html;charset=UTF-8'})
+    res.write("<script>alert('로그인 오류!')</script>");
+    res.write(`<script>window.location="/"</script>`);
+  }
+
+})
 
 const port = 3001;
 app.listen(port, () => {
