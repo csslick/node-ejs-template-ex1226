@@ -8,14 +8,12 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  로그인 상태: 
     <% if(locals.login) { %>
-        로그아웃
+      로그인 상태: <%= login %> 
     <% } else { %>
         로그인(안됨)
     <% } %>
-  아디: <%= admin.id  %> 
-  비번: <%= admin.pwd  %> 
+  아디: <%= id  %> 
   <% if(locals.userInfo) {%>
     <%= 에러 %>
   <%} else { %>

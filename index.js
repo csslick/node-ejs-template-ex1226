@@ -26,7 +26,7 @@ app.use(express.static("public"));
 
 // home
 app.get('/', function(요청, 응답){
-  응답.render('pages/index.ejs', {admin})
+  응답.render('pages/index.ejs', { id : admin.id})
 })
 
 // about
@@ -43,7 +43,7 @@ app.get('/product', function(req, res) {
 app.get('/admin', function(req, res) {
   res.render('pages/admin.ejs' , {
     title: "관리자 페이지",
-    admin
+    id: admin.id
   })
 })
 
@@ -56,7 +56,7 @@ app.get('/download', function(req, res) {
 
 // login page
 app.get('/login', function(req, res) {
-  res.render('pages/login.ejs', {admin})
+  res.render('pages/login.ejs', { id: admin.id})
 })
 
 
@@ -64,17 +64,18 @@ app.get('/login', function(req, res) {
 app.post('/login-check', function(req, res) {
   const id = req.body.id;
   const pwd = req.body.pwd;
-  const userinfo = { id, pwd }
   console.log(`id: ${id}, pwd: ${pwd}`)
+  // 로그인 성공시 홈으로
   if(id == admin.id && pwd == admin.pwd) {
     res.render('pages/index.ejs', { 
-      admin, 
+      id: admin.id, 
       login: true
     });
   } else {
-    res.writeHead(200, { 'Content-Type': 'text/html;charset=UTF-8'})
-    res.write("<script>alert('로그인 오류!')</script>");
-    res.write(`<script>window.location="/"</script>`);
+    res.render('pages/login.ejs', { 
+      id: admin.id, 
+      login: 'fail'
+    });
   }
 
 })
